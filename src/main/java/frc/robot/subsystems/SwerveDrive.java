@@ -198,9 +198,27 @@ public class SwerveDrive extends SubsystemBase {
         xSpeed = xSpeed * -1;
 
         // Cube the inputs for fine control at low speeds.
-        xSpeed = Math.pow(xSpeed, 3);
-        ySpeed = Math.pow(ySpeed, 3);
-        rSpeed = Math.pow(rSpeed, 3);
+
+
+        if (xSpeed < 0) xSpeed = - Math.pow(Math.abs(xSpeed), 0.5); 
+        else xSpeed = Math.pow(Math.abs(xSpeed), 0.5);
+
+        if (ySpeed < 0) ySpeed = - Math.pow(Math.abs(ySpeed), 0.5); 
+        else ySpeed = Math.pow(Math.abs(ySpeed), 0.5);
+
+        /*if (rSpeed < 0) rSpeed = - Math.pow(Math.abs(rSpeed), 0.5); 
+        else rSpeed = Math.pow(Math.abs(rSpeed), 0.5);*/
+
+        /* 
+        xSpeed = Math.pow(xSpeed, 1);
+        ySpeed = Math.pow(ySpeed, 1);
+        */
+        rSpeed = Math.pow(rSpeed, 1);
+
+        SmartDashboard.putNumber("xTransformed", xSpeed);
+        SmartDashboard.putNumber("yTransformed", ySpeed);
+        SmartDashboard.putNumber("rTransformed", rSpeed);
+
 
         SmartDashboard.putNumber("yaw", gyro.getYaw());
 
@@ -381,7 +399,7 @@ public class SwerveDrive extends SubsystemBase {
         return gyro.getRate() * (DriveConstants.GYRO_INVERTED ? -1.0 : 1.0);
     }
 
-    /**
+    /*
      * Returns a formatted string of the current pose of the robot.
      */
     public String getFomattedPose() {

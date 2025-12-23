@@ -16,7 +16,7 @@ import frc.robot.commands.DealgerUp;
 import frc.robot.commands.ElevatorManualUp;
 import frc.robot.commands.ElevatorManualDown;
 import frc.robot.commands.ElevatorTestOFF;
-import frc.robot.commands.ExampleCommand;
+
 import frc.robot.commands.HexAlign;
 import frc.robot.commands.ElevatorTestDOWN;
 import frc.robot.commands.ElevatorTestUP;
@@ -120,7 +120,7 @@ public class RobotContainer {
 
 
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * Use whis method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
    * 
@@ -178,7 +178,7 @@ public class RobotContainer {
         -MathUtil.applyDeadband(teoController.getLeftX(), OperatorConstants.DEADBAND), 
         -MathUtil.applyDeadband(teoController.getRightX(), OperatorConstants.DEADBAND), 
         true, 
-        false, 
+        true, 
         true)
       ,sd));
 
@@ -209,6 +209,8 @@ public class RobotContainer {
         true, 
         true)
       ,sd));
+
+    flightcont.getButton2().whileTrue(new RunCommand(() -> sd.zeroHeading(), sd));
   }
 
 
